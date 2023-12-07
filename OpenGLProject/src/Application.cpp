@@ -149,6 +149,10 @@ int main(void)
         2, 3, 0
     };
 
+    unsigned int vao; // vertex array object (id)
+    GLCall(glGenVertexArrays(1, &vao));
+    GLCall(glBindVertexArray(vao));
+
     unsigned int buffer;
     GLCall(glGenBuffers(1, &buffer));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
@@ -170,6 +174,12 @@ int main(void)
     GLCall(int location = glGetUniformLocation(shader, "u_Color")); // can be done only after binding shader using glUseProgram
     ASSERT(location != -1); // uniform not present or unused (and hence removed by compiler)
 
+    // Clearing everything
+    GLCall(glBindVertexArray(0));
+    GLCall(glUseProgram(0));
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
     float r = 0.0f;
     float increment = 0.05f;
     /* Loop until the user closes the window */
@@ -179,7 +189,16 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         /* TEST */
+        // Bind the shader
+        GLCall(glUseProgram(shader));
         GLCall(glUniform4f(location, r, 0.8f, 0.8f, 1.0f));
+
+        /*GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+        GLCall(glEnableVertexAttribArray(0));
+        GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0));*/
+        GLCall(glBindVertexArray(vao));
+
+        // Make a draw call
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr)); // nullptr since indices bound
 
         r += increment;
