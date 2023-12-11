@@ -1,1 +1,5 @@
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\Application.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\IndexBuffer.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\IndexBuffer.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Renderer.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\Renderer.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\VertexArray.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\VertexArray.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\VertexBuffer.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\VertexBuffer.obj
