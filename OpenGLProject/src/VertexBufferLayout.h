@@ -38,7 +38,7 @@ public:
 	template<typename T>
 	void Push(unsigned int count)
 	{
-		throw std::runtime_error("Layout does not support this type. Need new template specialization.");
+		throw std::runtime_error("Layout::Push does not support this type. Need new template specialization.");
 	}
 
 	template<>
