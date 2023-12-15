@@ -31,5 +31,4 @@
 *.out
 *.app
 
-.vs/OpenGLProject/FileContentIndex/
-.vs/OpenGLProject/v17/*
+.vs/
