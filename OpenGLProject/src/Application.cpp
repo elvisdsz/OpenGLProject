@@ -47,10 +47,10 @@ int main(void)
 
         //constexpr int v_count = 8;
         float positions[] = { // pos_x, pos_y, tex_x, tex_y
-            100.0f, 100.0f, 0.0f, 0.0f,
-        	200.0f, 100.0f, 1.0f, 0.0f,
-        	200.0f, 200.0f, 1.0f, 1.0f,
-            100.0f, 200.0f, 0.0f, 1.0f
+            -50.0f, -50.0f, 0.0f, 0.0f,
+        	 50.0f, -50.0f, 1.0f, 0.0f,
+        	 50.0f,  50.0f, 1.0f, 1.0f,
+            -50.0f,  50.0f, 0.0f, 1.0f
         };
 
         unsigned int indices[] = {
@@ -75,7 +75,7 @@ int main(void)
         glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
 
         // translate identity matrix by a opposite value as camera movement
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
+        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
         Shader shader("res/shaders/Basic.shader");
         shader.Bind();
@@ -116,7 +116,8 @@ int main(void)
         bool show_another_window = false;
         ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-        glm::vec3 translation(200, 200, 0);
+        glm::vec3 translationA(200, 200, 0);
+        glm::vec3 translationB(400, 200, 0);
 
         float r = 0.0f;
         float increment = 0.05f;
@@ -130,18 +131,28 @@ int main(void)
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
+            
+            // shader.SetUniform4f("u_Color", r, 0.8f, 0.8f, 1.0f);
 
-            // translate model
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
-            glm::mat4 mvp = proj * view * model; // OpenGL is column major, hence P V M 
+            {
+                shader.Bind(); // Bind the shader
+                // translate model
+                glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
+                glm::mat4 mvp = proj * view * model; // OpenGL is column major, hence P V M 
+                // Draw
+                shader.SetUniformMat4f("u_MVP", mvp);
+                renderer.Draw(va, ib, shader);
+            }
 
-            // Bind the shader
-            shader.Bind();
-            shader.SetUniform4f("u_Color", r, 0.8f, 0.8f, 1.0f);
-            shader.SetUniformMat4f("u_MVP", mvp);
-
-            // Make a draw call
-            renderer.Draw(va, ib, shader);
+            {
+                shader.Bind(); // Bind the shader
+                // translate model
+                glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
+                glm::mat4 mvp = proj * view * model; // OpenGL is column major, hence P V M 
+                // Draw again
+                shader.SetUniformMat4f("u_MVP", mvp);
+                renderer.Draw(va, ib, shader);
+            }
 
             r += increment;
 
@@ -150,25 +161,10 @@ int main(void)
 
             // ImGui window
             {
-                //static float f = 0.0f;
-                static int counter = 0;
-
-                ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-                ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-                ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-                ImGui::Checkbox("Another Window", &show_another_window);
-
-                ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-                ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-                if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-                    counter++;
-                ImGui::SameLine();
-                ImGui::Text("counter = %d", counter);
+                ImGui::SliderFloat3("Translation A", &translationA.x, 0.0f, 960.0f);
+                ImGui::SliderFloat3("Translation B", &translationB.x, 0.0f, 960.0f);
 
                 ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-                ImGui::End();
             }
 
             // ImGui Rendering
