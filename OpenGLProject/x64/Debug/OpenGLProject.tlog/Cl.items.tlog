@@ -4,6 +4,13 @@ D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Renderer.cpp;D:\Proj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Shader.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\Shader.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Texture.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\Texture.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\glm\detail\glm.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\glm.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui_demo.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui_demo.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui_draw.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui_draw.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui_impl_glfw.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui_impl_glfw.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui_impl_opengl3.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui_impl_opengl3.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui_tables.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui_tables.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui_widgets.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui_widgets.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\stb_image\stb_image.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\stb_image.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\VertexArray.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\VertexArray.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\VertexBuffer.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\VertexBuffer.obj
