@@ -72,23 +72,39 @@ int main(void)
         bool show_another_window = false;
         ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-        test::TestClearColor test;
+        test::Test* currentTest = nullptr;
+        test::TestMenu* testMenu = new test::TestMenu(currentTest);
+        currentTest = testMenu;
+
+        testMenu->RegisterTest<test::TestClearColor>("Clear Color");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
+            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             /* Render here */
             renderer.Clear();
-
-            test.OnUpdate(0.0f);
-            test.OnRender();
 
             // ImGui new frame
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            test.OnImGuiRender();
+            if (currentTest)
+            {
+                currentTest->OnUpdate(0.0f);
+                currentTest->OnRender();
+
+                ImGui::Begin("Test");
+                if (currentTest != testMenu && ImGui::Button("<-")) // add back button
+                {
+	                // if button clicked
+                    delete currentTest;
+                    currentTest = testMenu;
+                }
+                currentTest->OnImGuiRender();
+                ImGui::End();
+            }
 
             // ImGui Rendering
             ImGui::Render();
@@ -100,6 +116,10 @@ int main(void)
             /* Poll for and process events */
             glfwPollEvents();
         }
+
+        delete currentTest;
+        if (currentTest != testMenu)
+            delete testMenu;
 
     }
 
