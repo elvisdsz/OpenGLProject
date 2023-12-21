@@ -1,2 +1,10 @@
 ﻿  Application.cpp
+  TestTexture2D.cpp
+D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2D.cpp(39,31): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[16],unsigned __int64,0>(float (&)[16],unsigned __int64 &&)' being compiled
+  Generating Code...
   OpenGLProject.vcxproj -> D:\Projects\graphics\opengl\OpenGLProject\x64\Debug\OpenGLProject.exe
