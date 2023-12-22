@@ -46,6 +46,11 @@ void Shader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
     GLCall(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]));
 }
 
+void Shader::SetUniform1iv(const std::string& name, const int& count, const int* valueArray)
+{
+    GLCall(glUniform1iv(GetUniformLocation(name), count, valueArray));
+}
+
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
     std::ifstream stream(filepath); // opens the file
@@ -112,8 +117,8 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
 
     GLCall(glAttachShader(program, vs));
     GLCall(glAttachShader(program, fs));
-    GLCall(glLinkProgram(program))
-        GLCall(glValidateProgram(program));
+    GLCall(glLinkProgram(program));
+	GLCall(glValidateProgram(program));
 
     // glDetachShader(program, vs);
     // glDetachShader(program, fs);

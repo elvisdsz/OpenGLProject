@@ -5,6 +5,7 @@ D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Shader.cpp;D:\Projec
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\Test.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\Test.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestClearColor.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\TestClearColor.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2D.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\TestTexture2D.obj
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2DBatch.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\TestTexture2DBatch.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Texture.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\Texture.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\glm\detail\glm.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\glm.obj
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\vendor\imgui\imgui.cpp;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\x64\Debug\imgui.obj

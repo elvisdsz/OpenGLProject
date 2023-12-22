@@ -1,18 +1,8 @@
-﻿  Application.cpp
-  IndexBuffer.cpp
-  Renderer.cpp
-  Shader.cpp
-  Texture.cpp
-  VertexArray.cpp
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\VertexArray.cpp(25,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
-  VertexBuffer.cpp
-  TestClearColor.cpp
-  TestTexture2D.cpp
+﻿  TestTexture2DBatch.cpp
 D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
           with
           [
               _Ty=unsigned __int64
           ]
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2D.cpp(39,31): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[16],unsigned __int64,0>(float (&)[16],unsigned __int64 &&)' being compiled
-  Generating Code...
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2DBatch.cpp(44,31): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[80],unsigned __int64,0>(float (&)[80],unsigned __int64 &&)' being compiled
   OpenGLProject.vcxproj -> D:\Projects\graphics\opengl\OpenGLProject\x64\Debug\OpenGLProject.exe

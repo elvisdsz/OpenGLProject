@@ -19,6 +19,7 @@
 
 #include "test/TestClearColor.h"
 #include "test/TestTexture2D.h"
+#include "test/TestTexture2DBatch.h"
 
 int main(void)
 {
@@ -77,11 +78,12 @@ int main(void)
 
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
+        testMenu->RegisterTest<test::TestTexture2DBatch>("Batched 2D Texture");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
-            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+            GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
             /* Render here */
             renderer.Clear();
 
