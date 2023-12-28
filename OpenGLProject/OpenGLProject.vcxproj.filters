@@ -75,6 +75,9 @@
     <ClCompile Include="src\test\TestTexture2DBatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\test\TestDynamicGeometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
@@ -1396,6 +1399,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\test\TestTexture2DBatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\test\TestDynamicGeometry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
