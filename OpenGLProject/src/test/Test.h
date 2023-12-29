@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-#include "Camera.h"
+#include "glm/fwd.hpp"
 
 namespace test {
 
@@ -16,7 +16,7 @@ namespace test {
 		virtual ~Test() {}
 
 		virtual void OnUpdate(float deltaTime) {}
-		virtual void OnRender(const Camera& camera) {}
+		virtual void OnRender(const glm::mat4& cameraMatrix) {}
 		virtual void OnImGuiRender() {}
 
 	};

@@ -21,6 +21,8 @@
 #include "test/TestTexture2D.h"
 #include "test/TestTexture2DBatch.h"
 
+#include "Camera.h"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -53,6 +55,8 @@ int main(void)
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
         Renderer renderer;
+        //Camera camera(glm::vec3(960.0/2, 540.0/2, 0.0f));
+        Camera camera(glm::vec3(0.0f, 0.0f , 1.0f));
 
         // ImGUI stuff
         const char* glsl_version = "#version 330";
@@ -92,10 +96,12 @@ int main(void)
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
+            camera.OnUpdate(window); // check camera movement
+
             if (currentTest)
             {
                 currentTest->OnUpdate(0.0f);
-                currentTest->OnRender();
+                currentTest->OnRender(camera.GetCameraMatrix());
 
                 ImGui::Begin("Test");
                 if (currentTest != testMenu && ImGui::Button("<-")) // add back button

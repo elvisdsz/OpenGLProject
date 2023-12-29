@@ -11,7 +11,7 @@ namespace test
 		~TestClearColor();
 
 		void OnUpdate(float deltaTime) override;
-		void OnRender(const Camera& camera) override;
+		void OnRender(const glm::mat4& cameraMatrix) override;
 		void OnImGuiRender() override;
 
 	private:

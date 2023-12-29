@@ -15,7 +15,7 @@ namespace test
 		~TestTexture2D();
 
 		void OnUpdate(float deltaTime) override;
-		void OnRender(const Camera& camera) override;
+		void OnRender(const glm::mat4& cameraMatrix) override;
 		void OnImGuiRender() override;
 
 	private:
@@ -25,7 +25,7 @@ namespace test
 		std::unique_ptr<Shader> m_Shader;
 		std::unique_ptr<Texture> m_Texture;
 
-		glm::mat4 m_Proj, m_View;
+		glm::mat4 m_Proj;
 		glm::vec3 m_TranslationA, m_TranslationB;
 
 		ImGuiIO& m_IO;

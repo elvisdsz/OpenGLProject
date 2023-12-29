@@ -1,16 +1,19 @@
 #pragma once
 
+#include <GLFW/glfw3.h>
+
 #include "glm/glm.hpp"
 
 class Camera
 {
 private:
-	glm::vec3 m_Position;
+	mutable glm::vec3 m_Position;
+	static constexpr float m_MovementSpeed = 2.0f;
 
 public:
 	Camera(glm::vec3 position);
 	~Camera();
 
-	void OnUpdate(float deltaTime);
-	glm::mat4 GetCameraMatrix();
+	void OnUpdate(GLFWwindow* window) const;
+	glm::mat4 GetCameraMatrix() const;
 };
