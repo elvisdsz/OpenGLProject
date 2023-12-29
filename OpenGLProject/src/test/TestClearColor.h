@@ -11,7 +11,7 @@ namespace test
 		~TestClearColor();
 
 		void OnUpdate(float deltaTime) override;
-		void OnRender() override;
+		void OnRender(const Camera& camera) override;
 		void OnImGuiRender() override;
 
 	private:
