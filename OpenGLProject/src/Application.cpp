@@ -26,13 +26,14 @@
 int main(void)
 {
     GLFWwindow* window;
+    int win_width = 960, win_height = 540;
 
     /* Initialize the library */
     if (!glfwInit())
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(win_width, win_height, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -56,7 +57,7 @@ int main(void)
 
         Renderer renderer;
         //Camera camera(glm::vec3(960.0/2, 540.0/2, 0.0f));
-        Camera camera(glm::vec3(0.0f, 0.0f , 1.0f));
+        Camera camera(glm::vec3(0.0f, 0.0f , 1.0f), win_width, win_height);
 
         // ImGUI stuff
         const char* glsl_version = "#version 330";

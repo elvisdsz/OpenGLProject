@@ -14,7 +14,6 @@ namespace test
 {
     TestTexture2DBatch::TestTexture2DBatch()
 		: m_TranslationA(200, 200, 0), m_TranslationB(400, 200, 0),
-		m_Proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 		m_IO(ImGui::GetIO())
 	{
         float positions[] = { // pos_x, pos_y, pos_z, color_r, color_g, color_b, color_a, tex_x, tex_y, tex_id
@@ -83,7 +82,7 @@ namespace test
             m_Shader->Bind(); // Bind the shader
             // translate model
             glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
-            glm::mat4 mvp = m_Proj * cameraMatrix * model; // OpenGL is column major, hence P V M 
+            glm::mat4 mvp = cameraMatrix * model; // OpenGL is column major, hence P V M 
             // Draw
             m_Shader->SetUniformMat4f("u_MVP", mvp);
             renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);

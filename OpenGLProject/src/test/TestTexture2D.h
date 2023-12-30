@@ -25,7 +25,6 @@ namespace test
 		std::unique_ptr<Shader> m_Shader;
 		std::unique_ptr<Texture> m_Texture;
 
-		glm::mat4 m_Proj;
 		glm::vec3 m_TranslationA, m_TranslationB;
 
 		ImGuiIO& m_IO;
