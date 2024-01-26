@@ -1,26 +1,6 @@
 ﻿  Application.cpp
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(60,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(60,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  TestDynamicGeometry.cpp
-D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
-          with
-          [
-              _Ty=unsigned __int64
-          ]
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestDynamicGeometry.cpp(42,31): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[80],unsigned __int64,0>(float (&)[80],unsigned __int64 &&)' being compiled
-  TestTexture2D.cpp
-D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
-          with
-          [
-              _Ty=unsigned __int64
-          ]
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2D.cpp(37,31): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[16],unsigned __int64,0>(float (&)[16],unsigned __int64 &&)' being compiled
-  TestTexture2DBatch.cpp
-D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
-          with
-          [
-              _Ty=unsigned __int64
-          ]
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\TestTexture2DBatch.cpp(42,31): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[80],unsigned __int64,0>(float (&)[80],unsigned __int64 &&)' being compiled
+  Camera.cpp
   Generating Code...
   OpenGLProject.vcxproj -> D:\Projects\graphics\opengl\OpenGLProject\x64\Debug\OpenGLProject.exe
