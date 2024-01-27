@@ -5,7 +5,8 @@
 
 Camera::Camera(glm::vec3 position, float width, float height)
 	: m_Position(position), m_Width(width), m_Height(height), m_AspectRatio(width/height), m_ZoomUnits(0.0f),
-	m_Orientation(glm::vec3(0.0f, 0.0f, -1.0f))
+	m_Orientation(glm::vec3(0.0f, 0.0f, -1.0f)),
+	m_Yaw(-90.0f), m_Pitch(0.0f) // Yaw is initialized facing -Z and pitch to facing the horizon
 {
 	const glm::mat4 viewMatrix = glm::lookAt(m_Position, m_Position + glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	const glm::mat4 projMatrix = glm::ortho(0.0f, m_Width, 0.0f, m_Height, Z_NEAR, Z_FAR);
@@ -54,26 +55,27 @@ void Camera::OnUpdate(GLFWwindow* window)
 		modified = true;
 	}
 
-	bool orientationChanged = false;
+	
 	// Orientation
+	bool orientationChanged = false;
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
-		m_Yaw += m_Sensitivity;
+		m_Yaw += m_OrientationSensitivity;
 		orientationChanged = true;
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
-		m_Yaw -= m_Sensitivity;
+		m_Yaw -= m_OrientationSensitivity;
 		orientationChanged = true;
 	}
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
-		m_Pitch -= m_Sensitivity;
+		m_Pitch -= m_OrientationSensitivity;
 		orientationChanged = true;
 	}
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
-		m_Pitch += m_Sensitivity;
+		m_Pitch += m_OrientationSensitivity;
 		orientationChanged = true;
 	}
 
