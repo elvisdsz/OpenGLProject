@@ -1,8 +1,8 @@
 ﻿  Application.cpp
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(60,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(60,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Camera.cpp
-  Generating Code...
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(32,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(33,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(70,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(70,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library

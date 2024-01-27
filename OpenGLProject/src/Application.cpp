@@ -23,6 +23,16 @@
 
 #include "Camera.h"
 
+float LastMousePosX = 0.f, LastMousePosY = 0.f;
+bool MouseStartedMoving = false;
+
+// Function to handle mouse movement
+void mouseCallback(GLFWwindow* window, double xpos, double ypos)
+{
+    LastMousePosX = xpos;
+    LastMousePosY = ypos;
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -58,6 +68,8 @@ int main(void)
         Renderer renderer;
         //Camera camera(glm::vec3(960.0/2, 540.0/2, 0.0f));
         Camera camera(glm::vec3(0.0f, 0.0f , 1.0f), win_width, win_height);
+
+        glfwSetCursorPosCallback(window, mouseCallback);
 
         // ImGUI stuff
         const char* glsl_version = "#version 330";
@@ -97,7 +109,7 @@ int main(void)
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            camera.OnUpdate(window); // check camera movement
+            camera.OnUpdate(window, LastMousePosX, LastMousePosY); // check camera movement
 
             if (currentTest)
             {
