@@ -4,7 +4,7 @@
 #include "glm/ext/matrix_transform.hpp"
 
 Camera::Camera(glm::vec3 position, float width, float height)
-	: m_Position(position), m_Orientation(glm::vec3(0.0f, 0.0f, -1.0f)),
+	: m_Position(position), m_CameraFront(glm::vec3(0.0f, 0.0f, -1.0f)), m_CameraUp(glm::vec3(0.0f, 1.0f, 0.0f)),
 	m_Width(width), m_Height(height), m_AspectRatio(width/height), m_ZoomUnits(0.0f),
 	m_MousePrevX(0.f), m_MousePrevY(0.f), m_MouseStarted(false),
 	m_Yaw(-90.0f), m_Pitch(0.0f) // Yaw is initialized facing -Z and pitch to facing the horizon
@@ -22,26 +22,53 @@ void Camera::OnUpdate(GLFWwindow* window, float mouseOffsetX, float mouseOffsetY
 {
 	bool modified = false;
 
-	// Lateral movements
-	if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	// Walk - WASD movements
+	if(is3D)
 	{
-		m_Position += m_MovementSpeed * glm::vec3(0.0f, 1.0f, 0.0f);
-		modified = true;
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * m_CameraFront;
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			m_Position -= m_MovementSpeed * m_CameraFront;
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{
+			m_Position -= m_MovementSpeed * glm::normalize(glm::cross(m_CameraFront, m_CameraUp));
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * glm::normalize(glm::cross(m_CameraFront, m_CameraUp));
+			modified = true;
+		}
 	}
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	else
 	{
-		m_Position += m_MovementSpeed * glm::vec3(-1.0f, 0.0f, 0.0f);
-		modified = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	{
-		m_Position += m_MovementSpeed * glm::vec3(0.0f, -1.0f, 0.0f);
-		modified = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	{
-		m_Position += m_MovementSpeed * glm::vec3(1.0f, 0.0f, 0.0f);
-		modified = true;
+		// Lateral movements suitable for 2D
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * glm::vec3(0.0f, 1.0f, 0.0f);
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * glm::vec3(0.0f, -1.0f, 0.0f);
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * glm::vec3(-1.0f, 0.0f, 0.0f);
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * glm::vec3(1.0f, 0.0f, 0.0f);
+			modified = true;
+		}
 	}
 
 	// Zoom
@@ -56,47 +83,16 @@ void Camera::OnUpdate(GLFWwindow* window, float mouseOffsetX, float mouseOffsetY
 		modified = true;
 	}
 
-	
-	// Orientation
-	/*bool orientationChanged = false;
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
 	{
-		m_Yaw += m_MovementSpeed;
-		orientationChanged = true;
+		if (HandleMouse(mouseOffsetX, mouseOffsetY))
+		{
+			modified = true;
+		}
 	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	else if (m_MouseStarted) // clear previous mouse position on release
 	{
-		m_Yaw -= m_MovementSpeed;
-		orientationChanged = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-	{
-		m_Pitch -= m_MovementSpeed;
-		orientationChanged = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		m_Pitch += m_MovementSpeed;
-		orientationChanged = true;
-	}
-
-	if(orientationChanged)
-	{
-		// Clamp pitch to avoid flipping the camera
-		if (m_Pitch > 89.0f) m_Pitch = 89.0f;
-		if (m_Pitch < -89.0f) m_Pitch = -89.0f;
-
-		m_Orientation.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
-		m_Orientation.y = sin(glm::radians(m_Pitch));
-		m_Orientation.z = sin(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
-		m_Orientation = glm::normalize(m_Orientation);
-
-		modified = true;
-	}*/
-
-	if (HandleMouse(mouseOffsetX, mouseOffsetY))
-	{
-		modified = true;
+		m_MouseStarted = false;
 	}
 
 	// Update matrices
@@ -108,7 +104,7 @@ void Camera::OnUpdate(GLFWwindow* window, float mouseOffsetX, float mouseOffsetY
 
 void Camera::UpdateCameraMatrix()
 {
-	const glm::mat4 viewMatrix = glm::lookAt(m_Position, m_Position + m_Orientation, glm::vec3(0.0f, 1.0f, 0.0f));
+	const glm::mat4 viewMatrix = glm::lookAt(m_Position, m_Position + m_CameraFront, m_CameraUp);
 	const glm::mat4 projMatrix = glm::ortho(m_ZoomUnits * m_AspectRatio, m_Width - (m_ZoomUnits * m_AspectRatio), m_ZoomUnits, m_Height - m_ZoomUnits, Z_NEAR, Z_FAR);
 	m_CamMatrix = projMatrix * viewMatrix;
 }
@@ -116,6 +112,11 @@ void Camera::UpdateCameraMatrix()
 glm::mat4 Camera::GetCameraMatrix() const
 {
 	return m_CamMatrix;
+}
+
+glm::vec3 Camera::GetCameraPosition() const
+{
+	return m_Position;
 }
 
 bool Camera::HandleMouse(float xpos, float ypos)
@@ -146,10 +147,10 @@ bool Camera::HandleMouse(float xpos, float ypos)
 	if (m_Pitch > 89.0f) m_Pitch = 89.0f;
 	if (m_Pitch < -89.0f) m_Pitch = -89.0f;
 
-	m_Orientation.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
-	m_Orientation.y = sin(glm::radians(m_Pitch));
-	m_Orientation.z = sin(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
-	m_Orientation = glm::normalize(m_Orientation);
+	m_CameraFront.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
+	m_CameraFront.y = sin(glm::radians(m_Pitch));
+	m_CameraFront.z = sin(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));
+	m_CameraFront = glm::normalize(m_CameraFront);
 
 	return true;
 }

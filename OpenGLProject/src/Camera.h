@@ -7,6 +7,8 @@
 class Camera
 {
 private:
+	static constexpr bool is3D = true;
+
 	static constexpr float m_MovementSpeed = 2.0f;
 	static constexpr float m_ZoomSpeed = 1.0f;
 	static constexpr float m_MouseSensitivity = 0.1f;
@@ -15,7 +17,8 @@ private:
 	static constexpr float Z_FAR = 1000.0f;
 
 	glm::vec3 m_Position;
-	glm::vec3 m_Orientation;
+	glm::vec3 m_CameraFront;
+	glm::vec3 m_CameraUp;
 	float m_Width, m_Height;
 	float m_AspectRatio;
 
@@ -38,6 +41,7 @@ public:
 	~Camera();
 
 	void OnUpdate(GLFWwindow* window, float mouseOffsetX = 0.f, float mouseOffsetY = 0.f);
+	glm::vec3 GetCameraPosition() const;
 	glm::mat4 GetCameraMatrix() const;
 	bool HandleMouse(float xpos, float ypos);
 };
