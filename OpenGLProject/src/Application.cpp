@@ -66,8 +66,8 @@ int main(void)
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
         Renderer renderer;
-        //Camera camera(glm::vec3(960.0/2, 540.0/2, 0.0f));
-        Camera camera(glm::vec3(0.0f, 0.0f , 1.0f), win_width, win_height);
+
+        Camera camera(win_width, win_height);
 
         glfwSetCursorPosCallback(window, mouseCallback);
 
@@ -110,6 +110,7 @@ int main(void)
             ImGui::NewFrame();
 
             camera.OnUpdate(window, LastMousePosX, LastMousePosY); // check camera movement
+            camera.OnImGuiRender(); // show camera parameters
 
             if (currentTest)
             {
