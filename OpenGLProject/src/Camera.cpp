@@ -24,9 +24,10 @@ void Camera::OnUpdate(GLFWwindow* window, float mouseOffsetX, float mouseOffsetY
 {
 	bool modified = false;
 
-	// Walk - WASD movements
+	
 	if (IS3D)
 	{
+		// walk - WASD movements
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			m_Position += m_MovementSpeed * m_CameraFront;
@@ -46,6 +47,18 @@ void Camera::OnUpdate(GLFWwindow* window, float mouseOffsetX, float mouseOffsetY
 		{
 			m_Position += m_MovementSpeed * glm::normalize(glm::cross(m_CameraFront, m_CameraUp));
 			modified = true;
+		}
+
+		// vertical movement - EQ
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+		{
+			m_Position += m_MovementSpeed * m_CameraUp;
+			modified = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+		{
+			m_Position -= m_MovementSpeed * m_CameraUp;
+			modified = true; 
 		}
 	}
 	else
