@@ -11,4 +11,6 @@ public:
 
 	void Bind() const;
 	void Unbind() const;
+
+	void UpdateBuffer(int offset, unsigned int size, const void* newData) const;
 };

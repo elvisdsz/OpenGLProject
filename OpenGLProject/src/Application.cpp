@@ -17,11 +17,13 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+#include "Camera.h"
+
 #include "test/TestClearColor.h"
 #include "test/TestTexture2D.h"
 #include "test/TestTexture2DBatch.h"
-
-#include "Camera.h"
+#include "test/TestDynamicGeometry.h"
+#include "test/particles/TestParticleSystem.h"
 
 float LastMousePosX = 0.f, LastMousePosY = 0.f;
 bool MouseStartedMoving = false;
@@ -96,6 +98,8 @@ int main(void)
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
         testMenu->RegisterTest<test::TestTexture2DBatch>("Batched 2D Texture");
+        testMenu->RegisterTest<test::TestDynamicGeometry>("Dynamic Geometry");
+        testMenu->RegisterTest<test::TestParticleSystem>("Particle System");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -114,7 +118,7 @@ int main(void)
 
             if (currentTest)
             {
-                currentTest->OnUpdate(0.0f);
+                currentTest->OnUpdate(0.01667f); // TODO: Get actual deltaTime value
                 currentTest->OnRender(camera.GetCameraMatrix());
 
                 ImGui::Begin("Test");

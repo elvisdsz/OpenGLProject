@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)OpenGLProject\Dependencies\GLFW\include;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)OpenGLProject\Dependencies\GLFW\include;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\include;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\Dependencies\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)OpenGLProject\Dependencies\GLFW\lib-vc2022;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)OpenGLProject\Dependencies\GLFW\lib-vc2022;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\Dependencies\assimp\lib;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -121,14 +121,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)OpenGLProject\Dependencies\GLFW\include;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)OpenGLProject\Dependencies\GLFW\include;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\include;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\Dependencies\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)OpenGLProject\Dependencies\GLFW\lib-vc2022;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)OpenGLProject\Dependencies\GLFW\lib-vc2022;D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\Dependencies\assimp\lib;$(SolutionDir)OpenGLProject\Dependencies\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,6 +141,7 @@
     <ClCompile Include="src\test\Test.cpp" />
     <ClCompile Include="src\test\TestClearColor.cpp" />
     <ClCompile Include="src\test\TestDynamicGeometry.cpp" />
+    <ClCompile Include="src\test\particles\TestParticleSystem.cpp" />
     <ClCompile Include="src\test\TestTexture2D.cpp" />
     <ClCompile Include="src\test\TestTexture2DBatch.cpp" />
     <ClCompile Include="src\Texture.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <None Include="res\shaders\Advanced.shader" />
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\BasicParticle.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -304,6 +306,7 @@
     <ClInclude Include="src\test\Test.h" />
     <ClInclude Include="src\test\TestClearColor.h" />
     <ClInclude Include="src\test\TestDynamicGeometry.h" />
+    <ClInclude Include="src\test\particles\TestParticleSystem.h" />
     <ClInclude Include="src\test\TestTexture2D.h" />
     <ClInclude Include="src\test\TestTexture2DBatch.h" />
     <ClInclude Include="src\Texture.h" />

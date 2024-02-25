@@ -66,6 +66,7 @@ namespace test
 
 	void TestDynamicGeometry::OnUpdate(float deltaTime)
 	{
+        m_TranslationA += glm::vec3({ -10.f * deltaTime, -4.5f * deltaTime, 0.f });
 	}
 
 	void TestDynamicGeometry::OnRender(const glm::mat4& cameraMatrix)
