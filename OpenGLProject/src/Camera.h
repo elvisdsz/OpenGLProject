@@ -18,9 +18,10 @@ private:
 	static constexpr float Z_NEAR = 0.1f;
 	static constexpr float Z_FAR = 1000.0f;
 
+	static constexpr glm::vec3 m_CameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
 	glm::vec3 m_Position;
 	glm::vec3 m_CameraFront;
-	glm::vec3 m_CameraUp;
 	float m_Width, m_Height;
 	float m_AspectRatio;
 
@@ -46,7 +47,7 @@ public:
 	void OnImGuiRender() const;
 
 	const glm::vec3 GetCameraPosition() const;
-	const glm::vec3 GetCameraUp() const;
+	static const glm::vec3 GetCameraUp();
 	const glm::mat4 GetCameraMatrix() const;
 	bool HandleMouse(float xpos, float ypos);
 

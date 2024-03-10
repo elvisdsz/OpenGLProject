@@ -5,7 +5,7 @@
 #include "imgui/imgui.h"
 
 Camera::Camera(float width, float height, glm::vec3 position /* = DEFAULT_STARTING_POSITION */)
-	: m_Position(position), m_CameraFront(glm::vec3(0.0f, 0.0f, -1.0f)), m_CameraUp(glm::vec3(0.0f, 1.0f, 0.0f)),
+	: m_Position(position), m_CameraFront(glm::vec3(0.0f, 0.0f, -1.0f)),
 	m_Width(width), m_Height(height), m_AspectRatio(width/height), m_ZoomUnits(0.0f),
 	m_MousePrevX(0.f), m_MousePrevY(0.f), m_MouseStarted(false),
 	m_Yaw(-90.0f), m_Pitch(0.0f) // Yaw is initialized facing -Z and pitch to facing the horizon
@@ -148,7 +148,7 @@ const glm::vec3 Camera::GetCameraPosition() const
 	return m_Position;
 }
 
-const glm::vec3 Camera::GetCameraUp() const
+const glm::vec3 Camera::GetCameraUp()
 {
 	return m_CameraUp;
 }

@@ -19,6 +19,8 @@ namespace test
 		void OnImGuiRender() override;
 
 	private:
+		static glm::mat4 GetBillboardMatrix(const glm::vec3& particleCenter, const glm::vec3& cameraPosition, const glm::vec3& upVector);
+
 		std::unique_ptr<VertexArray> m_VAO;
 		std::unique_ptr<VertexBuffer> m_VertexBuffer;
 		std::unique_ptr<IndexBuffer> m_IndexBuffer;
@@ -40,12 +42,14 @@ namespace test
 
 		// buffer
 		float m_Vertices[m_MaxParticleCount * 4 * 10];
+		glm::vec3 m_ParticlePositions[m_MaxParticleCount];
 		glm::vec3 m_ParticleVelocities[m_MaxParticleCount];
 
 		// working params
 		float m_TimeSinceEmissionStart = 0;
 		unsigned int m_FirstParticleIndex = 0;
 		unsigned int m_ActiveParticleCount = 0;
+		glm::vec3 m_lastCameraPosition;
 
 	};
 }

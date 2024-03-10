@@ -18,13 +18,16 @@
 namespace test
 {
     TestParticleSystem::TestParticleSystem()
-		: m_Translation(0, 0, 0),
-		m_IO(ImGui::GetIO())
+        : m_Translation(0, 0, 0),
+		m_IO(ImGui::GetIO()),
+        m_lastCameraPosition(0.f, 0.f, 0.f)
 	{
         unsigned int indices[m_MaxParticleCount * 6];
 
         for (int i=0; i < m_MaxParticleCount; ++i)
         {
+            m_ParticlePositions[i] = m_ParticleSource;
+
             float rectVertices[] = {
                 // pos_x, pos_y, pos_z, color_r, color_g, color_b, color_a, tex_x, tex_y, tex_id
                 m_ParticleSource.x - m_ParticleSize, m_ParticleSource.y - m_ParticleSize, m_ParticleSource.z+0.0f, 0.18f, 0.6f, 0.96f, 1.0f, 0.0f, 0.0f, 0.0f,
@@ -94,39 +97,39 @@ namespace test
             unsigned int particleIndex = m_FirstParticleIndex + i;
 
             const glm::vec3 particleVelocity = m_ParticleMaxSpeed * m_ParticleVelocities[particleIndex];
-            glm::vec3 vertexPosition = { m_Vertices[particleIndex * 4 * 10], m_Vertices[particleIndex * 4 * 10 + 1], m_Vertices[particleIndex * 4 * 10 + 2] };
-
+            m_ParticlePositions[i] += particleVelocity;
 
             // check if distance limit reached. approximated from first vertex - bottom left.
-            const glm::vec3 distanceVec = vertexPosition - m_ParticleSource;
+            const glm::vec3 distanceVec = m_ParticlePositions[i] - m_ParticleSource;
             const float sqDistanceFromSource = glm::dot(distanceVec, distanceVec);
 
-            if(sqDistanceFromSource >= m_ParticleMaxDistanceSq)
-            {
-	            // set particle back to emitter source
-                float rectVertices[] = {
-                m_ParticleSource.x - m_ParticleSize, m_ParticleSource.y - m_ParticleSize, m_ParticleSource.z + 0.0f,
-                m_ParticleSource.x + m_ParticleSize, m_ParticleSource.y - m_ParticleSize, m_ParticleSource.z + 0.0f,
-                m_ParticleSource.x + m_ParticleSize, m_ParticleSource.y + m_ParticleSize, m_ParticleSource.z + 0.0f,
-                m_ParticleSource.x - m_ParticleSize, m_ParticleSource.y + m_ParticleSize, m_ParticleSource.z + 0.0f
-                };
+            // make shape
+            const float rectVertices[] = {
+                -m_ParticleSize, -m_ParticleSize, 0.0f,
+                +m_ParticleSize, -m_ParticleSize, 0.0f,
+                +m_ParticleSize, +m_ParticleSize, 0.0f,
+                -m_ParticleSize, +m_ParticleSize, 0.0f
+            };
 
-                memcpy(&m_Vertices[particleIndex * 4 * 10],      rectVertices+0, sizeof(float) * 3);
-                memcpy(&m_Vertices[particleIndex * 4 * 10 + 10], rectVertices+3, sizeof(float) * 3);
-                memcpy(&m_Vertices[particleIndex * 4 * 10 + 20], rectVertices+6, sizeof(float) * 3);
-                memcpy(&m_Vertices[particleIndex * 4 * 10 + 30], rectVertices+9, sizeof(float) * 3);
+            if (sqDistanceFromSource >= m_ParticleMaxDistanceSq)
+            {
+                // set particle back to emitter source
+                m_ParticlePositions[i] = m_ParticleSource;
             }
 
-            else
+            // Rotate particles to face camera
+            glm::mat4 billboardMatrix = GetBillboardMatrix(m_ParticlePositions[i], m_lastCameraPosition, Camera::GetCameraUp());
+
+            for (int vi = 0; vi < 4; ++vi)
             {
-                for (int vi=0; vi < 4; ++vi)
-                {
-                    vertexPosition = { m_Vertices[particleIndex * 4 * 10 + vi*10], m_Vertices[particleIndex * 4 * 10 + vi*10 + 1], m_Vertices[particleIndex * 4 * 10 + vi*10 + 2] };
-                    vertexPosition += particleVelocity;
-                    const float* newVetexPosition = glm::value_ptr(vertexPosition);
-                    memcpy(&m_Vertices[particleIndex * 4 * 10 + vi*10], newVetexPosition, sizeof(float) * 3);
-                }
+            	glm::vec3 vertexPosition = glm::vec3(
+                    billboardMatrix * glm::vec4(rectVertices[0 + vi * 3], rectVertices[1 + vi * 3], rectVertices[2 + vi * 3], 1.0f)
+				);
+
+	            vertexPosition += m_ParticlePositions[i];
+	            memcpy(&m_Vertices[particleIndex * 4 * 10 + vi*10], glm::value_ptr(vertexPosition), sizeof(float) * 3);
             }
+            
         }
 
         m_VertexBuffer->UpdateBuffer(0, sizeof(m_Vertices), &m_Vertices);
@@ -153,6 +156,8 @@ namespace test
 
             renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
         }
+
+        m_lastCameraPosition = camera.GetCameraPosition();
 	}
 
 	void TestParticleSystem::OnImGuiRender()
@@ -161,5 +166,19 @@ namespace test
 
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / m_IO.Framerate, m_IO.Framerate);
 	}
+
+    glm::mat4 TestParticleSystem::GetBillboardMatrix(const glm::vec3& particleCenter, const glm::vec3& cameraPosition, const glm::vec3& upVector)
+    {
+        const glm::vec3 direction = glm::normalize(cameraPosition - particleCenter);
+        const glm::vec3 right = glm::cross(upVector, direction);
+        const glm::vec3 newUp = glm::cross(direction, right);
+
+        glm::mat4 rotationMatrix(1.0f);
+        rotationMatrix[0] = glm::vec4(right, 0.0f);
+        rotationMatrix[1] = glm::vec4(newUp, 0.0f);
+        rotationMatrix[2] = glm::vec4(direction, 0.0f);
+
+        return rotationMatrix;
+    }
 
 }
