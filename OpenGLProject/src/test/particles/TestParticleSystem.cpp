@@ -95,7 +95,7 @@ namespace test
 
             const glm::vec3 particleVelocity = m_ParticleMaxSpeed * m_ParticleVelocities[particleIndex];
             glm::vec3 vertexPosition = { m_Vertices[particleIndex * 4 * 10], m_Vertices[particleIndex * 4 * 10 + 1], m_Vertices[particleIndex * 4 * 10 + 2] };
-            
+
 
             // check if distance limit reached. approximated from first vertex - bottom left.
             const glm::vec3 distanceVec = vertexPosition - m_ParticleSource;
@@ -119,24 +119,13 @@ namespace test
 
             else
             {
-                // vertex 0
-                const float* newVetexPosition = glm::value_ptr(vertexPosition + particleVelocity);
-                memcpy(&m_Vertices[particleIndex * 4 * 10], newVetexPosition, sizeof(float) * 3);
-
-                // vertex 1
-                vertexPosition = { m_Vertices[particleIndex * 4 * 10 + 10], m_Vertices[particleIndex * 4 * 10 + 11], m_Vertices[particleIndex * 4 * 10 + 12] };
-                newVetexPosition = glm::value_ptr(vertexPosition + particleVelocity);
-                memcpy(&m_Vertices[particleIndex * 4 * 10 + 10], newVetexPosition, sizeof(float) * 3);
-
-                // vertex 2
-                vertexPosition = { m_Vertices[particleIndex * 4 * 10 + 20], m_Vertices[particleIndex * 4 * 10 + 21], m_Vertices[particleIndex * 4 * 10 + 22] };
-                newVetexPosition = glm::value_ptr(vertexPosition + particleVelocity);
-                memcpy(&m_Vertices[particleIndex * 4 * 10 + 20], newVetexPosition, sizeof(float) * 3);
-
-                // vertex 3
-                vertexPosition = { m_Vertices[particleIndex * 4 * 10 + 30], m_Vertices[particleIndex * 4 * 10 + 31], m_Vertices[particleIndex * 4 * 10 + 32] };
-                newVetexPosition = glm::value_ptr(vertexPosition + particleVelocity);
-                memcpy(&m_Vertices[particleIndex * 4 * 10 + 30], newVetexPosition, sizeof(float) * 3);
+                for (int vi=0; vi < 4; ++vi)
+                {
+                    vertexPosition = { m_Vertices[particleIndex * 4 * 10 + vi*10], m_Vertices[particleIndex * 4 * 10 + vi*10 + 1], m_Vertices[particleIndex * 4 * 10 + vi*10 + 2] };
+                    vertexPosition += particleVelocity;
+                    const float* newVetexPosition = glm::value_ptr(vertexPosition);
+                    memcpy(&m_Vertices[particleIndex * 4 * 10 + vi*10], newVetexPosition, sizeof(float) * 3);
+                }
             }
         }
 
