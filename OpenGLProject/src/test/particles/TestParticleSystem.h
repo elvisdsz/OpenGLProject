@@ -15,7 +15,7 @@ namespace test
 		~TestParticleSystem();
 
 		void OnUpdate(float deltaTime) override;
-		void OnRender(const glm::mat4& cameraMatrix) override;
+		void OnRender(const Camera& camera) override;
 		void OnImGuiRender() override;
 
 	private:

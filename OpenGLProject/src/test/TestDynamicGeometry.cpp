@@ -1,5 +1,6 @@
 #include "TestDynamicGeometry.h"
 
+#include "Camera.h"
 #include "Renderer.h"
 #include "Texture.h"
 #include "VertexBuffer.h"
@@ -69,7 +70,7 @@ namespace test
         m_TranslationA += glm::vec3({ -10.f * deltaTime, -4.5f * deltaTime, 0.f });
 	}
 
-	void TestDynamicGeometry::OnRender(const glm::mat4& cameraMatrix)
+	void TestDynamicGeometry::OnRender(const Camera& camera)
 	{
 		GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
@@ -83,7 +84,7 @@ namespace test
             m_Shader->Bind(); // Bind the shader
             // translate model
             glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
-            glm::mat4 mvp = cameraMatrix * model; // OpenGL is column major, hence P V M 
+            glm::mat4 mvp = camera.GetCameraMatrix() * model; // OpenGL is column major, hence P V M 
             // Draw
             m_Shader->SetUniformMat4f("u_MVP", mvp);
             renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);

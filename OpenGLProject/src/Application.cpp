@@ -119,7 +119,7 @@ int main(void)
             if (currentTest)
             {
                 currentTest->OnUpdate(0.01667f); // TODO: Get actual deltaTime value
-                currentTest->OnRender(camera.GetCameraMatrix());
+                currentTest->OnRender(camera);
 
                 ImGui::Begin("Test");
                 if (currentTest != testMenu && ImGui::Button("<-")) // add back button

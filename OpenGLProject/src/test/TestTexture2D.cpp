@@ -1,5 +1,6 @@
 #include "TestTexture2D.h"
 
+#include "Camera.h"
 #include "Renderer.h"
 #include "Texture.h"
 #include "VertexBuffer.h"
@@ -58,12 +59,14 @@ namespace test
 	{
 	}
 
-	void TestTexture2D::OnRender(const glm::mat4& cameraMatrix)
+	void TestTexture2D::OnRender(const Camera& camera)
 	{
 		GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
         Renderer renderer; // low memory footprint. Not a big issue creating every frame.
+
+        const glm::mat4 cameraMatrix = camera.GetCameraMatrix();
 
         m_Texture->Bind();
 

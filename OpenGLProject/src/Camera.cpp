@@ -127,7 +127,7 @@ void Camera::UpdateCameraMatrix()
 	m_CamMatrix = projMatrix * viewMatrix;
 }
 
-glm::mat4 Camera::GetCameraMatrix() const
+const glm::mat4 Camera::GetCameraMatrix() const
 {
 	return m_CamMatrix;
 }
@@ -143,9 +143,14 @@ void Camera::OnImGuiRender() const
 	ImGui::End();
 }
 
-glm::vec3 Camera::GetCameraPosition() const
+const glm::vec3 Camera::GetCameraPosition() const
 {
 	return m_Position;
+}
+
+const glm::vec3 Camera::GetCameraUp() const
+{
+	return m_CameraUp;
 }
 
 bool Camera::HandleMouse(float xpos, float ypos)

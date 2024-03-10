@@ -1,5 +1,6 @@
 #include "TestParticleSystem.h"
 
+#include "Camera.h"
 #include "Renderer.h"
 #include "Texture.h"
 #include "VertexBuffer.h"
@@ -142,7 +143,7 @@ namespace test
         m_VertexBuffer->UpdateBuffer(0, sizeof(m_Vertices), &m_Vertices);
 	}
 
-	void TestParticleSystem::OnRender(const glm::mat4& cameraMatrix)
+	void TestParticleSystem::OnRender(const Camera& camera)
 	{
 		GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
@@ -155,8 +156,9 @@ namespace test
         {
             m_Shader->Bind(); // Bind the shader
             // translate model
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_Translation);
-            glm::mat4 mvp = cameraMatrix * model; // OpenGL is column major, hence P V M 
+            glm::mat4 model = glm::translate(glm::mat4(1.0f), m_Translation);
+
+            glm::mat4 mvp = camera.GetCameraMatrix() * model; // OpenGL is column major, hence P V M 
             // Draw
             m_Shader->SetUniformMat4f("u_MVP", mvp);
 

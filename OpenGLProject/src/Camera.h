@@ -45,8 +45,9 @@ public:
 	void OnUpdate(GLFWwindow* window, float mouseOffsetX = 0.f, float mouseOffsetY = 0.f);
 	void OnImGuiRender() const;
 
-	glm::vec3 GetCameraPosition() const;
-	glm::mat4 GetCameraMatrix() const;
+	const glm::vec3 GetCameraPosition() const;
+	const glm::vec3 GetCameraUp() const;
+	const glm::mat4 GetCameraMatrix() const;
 	bool HandleMouse(float xpos, float ypos);
 
 };

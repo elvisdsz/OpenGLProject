@@ -1,11 +1,17 @@
-﻿  TestParticleSystem.cpp
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\particles\TestParticleSystem.cpp(83,44): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
-D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\particles\TestParticleSystem.cpp(91,27): warning C4018: '<': signed/unsigned mismatch
+﻿  Application.cpp
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(34,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(35,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(72,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\Application.cpp(72,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  TestParticleSystem.cpp
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\particles\TestParticleSystem.cpp(84,44): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\particles\TestParticleSystem.cpp(92,27): warning C4018: '<': signed/unsigned mismatch
 D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3465,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
   (compiling source file 'src/test/particles/TestParticleSystem.cpp')
   D:\Programs\VisualStudio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3465,56):
   the template instantiation context (the oldest one first) is
-  	D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\particles\TestParticleSystem.cpp(52,31):
+  	D:\Projects\graphics\opengl\OpenGLProject\OpenGLProject\src\test\particles\TestParticleSystem.cpp(53,31):
   	see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,float(&)[4000],size_t,0>(float (&)[4000],size_t &&)' being compiled
   
+  Generating Code...
   OpenGLProject.vcxproj -> D:\Projects\graphics\opengl\OpenGLProject\x64\Debug\OpenGLProject.exe
