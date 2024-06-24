@@ -5,7 +5,17 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 
-#define ASSERT(x) if (!(x)) __debugbreak();
+#if defined(_MSC_VER)
+    #include <intrin.h>
+    #define debugbreak() __debugbreak()
+#elif defined(__GNUC__) || defined(__clang__)
+    #include <signal.h>
+    #define debugbreak() raise(SIGTRAP)
+#else
+    #error "Platform not supported"
+#endif
+
+#define ASSERT(x) if (!(x)) debugbreak();
 #define GLCall(x) GLClearError();\
     x;\
     ASSERT(GLLogCall(#x, __FILE__, __LINE__))
