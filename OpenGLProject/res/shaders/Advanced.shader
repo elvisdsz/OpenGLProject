@@ -58,5 +58,13 @@ void main()
     //color = vec4(v_TexID, v_TexID, 0.0f, 1.0f);
     
     int index = int(v_TexID);
-    color = texture(u_Textures[index], v_TexCoord);
+    switch (index)
+    {
+        case 0:
+            color = texture(u_Textures[0], v_TexCoord);
+            break;
+        case 1:
+            color = texture(u_Textures[1], v_TexCoord);
+            break;
+    }
 };
