@@ -1,0 +1,8 @@
+{
+    "cmake.sourceDirectory": "/home/elvisdsouza/Projects/gamedev/gfx/opengl/OpenGLProject/OpenGLProject",
+    "files.associations": {
+        "iostream": "cpp",
+        "stdexcept": "cpp",
+        "vector": "cpp"
+    }
+}
