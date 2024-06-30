@@ -4,6 +4,10 @@
 #include "glm/ext/matrix_transform.hpp"
 #include "imgui/imgui.h"
 
+// static definitions for linker
+constexpr glm::vec3 Camera::DEFAULT_STARTING_POSITION;
+constexpr glm::vec3 Camera::m_CameraUp;
+
 Camera::Camera(float width, float height, glm::vec3 position /* = DEFAULT_STARTING_POSITION */)
 	: m_Position(position), m_CameraFront(glm::vec3(0.0f, 0.0f, -1.0f)),
 	m_Width(width), m_Height(height), m_AspectRatio(width/height), m_ZoomUnits(0.0f),

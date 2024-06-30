@@ -17,6 +17,11 @@
 
 namespace test
 {
+
+    // static definitions for linker
+    constexpr glm::vec3 TestParticleSystem::m_ParticleSource;
+    constexpr glm::vec3 TestParticleSystem::m_ParticleMaxSpeed;
+
     TestParticleSystem::TestParticleSystem()
         : m_Translation(0, 0, 0),
 		m_IO(ImGui::GetIO()),
@@ -92,7 +97,7 @@ namespace test
         }
 
         // Update particles
-        for (int i = 0; i < m_ActiveParticleCount; ++i)
+        for (unsigned int i = 0; i < m_ActiveParticleCount; ++i)
         {
             unsigned int particleIndex = m_FirstParticleIndex + i;
 
